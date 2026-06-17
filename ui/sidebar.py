@@ -1,7 +1,7 @@
 import streamlit as st
 
 
-def render_sidebar() -> bool:
+def render_sidebar() -> None:
     with st.sidebar:
         st.markdown("### Screening Guide")
         st.caption("Reference values for frontline health workers.")
@@ -35,7 +35,3 @@ def render_sidebar() -> bool:
             "Combines anthropometric vitals with socio-behavioural indicators. "
             "Outputs are decision-support classifications, not a clinical diagnosis."
         )
-
-        dark_mode = st.toggle("Dark mode", value=False, key="dark_mode")
-
-    return dark_mode
