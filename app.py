@@ -14,17 +14,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-if "dark_mode" not in st.session_state:
-    st.session_state["dark_mode"] = False
-
-_, top_right = st.columns([10, 1])
-with top_right:
-    icon = "🌙" if not st.session_state["dark_mode"] else "☀️"
-    if st.button(icon, key="theme_toggle_icon", help="Toggle light/dark mode"):
-        st.session_state["dark_mode"] = not st.session_state["dark_mode"]
-
-dark_mode = st.session_state["dark_mode"]
-inject_theme(dark_mode=dark_mode)
+inject_theme()
 render_sidebar()
 render_header()
 
