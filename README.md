@@ -89,5 +89,8 @@ streamlit run app.py         # launch the web app
 ```
 
 **App tabs**
-- **Patient Screening** — enter vitals and socio-behavioural inputs; compare LR vs Decision Tree predictions for one child.
-- **Model Performance** — view CV/test metrics, confusion matrices, and feature importance from `models/metrics.json`.
+- **Patient Screening** — enter vitals and socio-behavioural inputs; compare LR vs Decision Tree predictions for one child; download CSV/text screening reports.
+- **Model Performance** — view CV/test metrics, confusion matrix heatmaps, and feature importance from `models/metrics.json`.
+
+**Sidebar**
+- WHO MUAC reference cutoffs, screening tips, and optional dark mode toggle.

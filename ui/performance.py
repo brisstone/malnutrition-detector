@@ -1,9 +1,9 @@
 import pandas as pd
 import streamlit as st
 
+from ui.charts import render_confusion_heatmap, render_confusion_matrix_table
 from ui.components import (
     render_classification_table,
-    render_confusion_matrix,
     render_metric_tile,
     section_card,
 )
@@ -60,11 +60,13 @@ def render_performance_tab(metrics: dict | None) -> None:
                 use_container_width=True,
                 hide_index=True,
             )
-            st.markdown("**Confusion matrix**")
-            st.dataframe(
-                render_confusion_matrix(log_m["confusion_matrix"], classes),
-                use_container_width=True,
-            )
+            st.markdown("**Confusion matrix heatmap**")
+            render_confusion_heatmap(log_m["confusion_matrix"], classes, "Logistic Regression")
+            with st.expander("View raw confusion matrix"):
+                st.dataframe(
+                    render_confusion_matrix_table(log_m["confusion_matrix"], classes),
+                    use_container_width=True,
+                )
 
     with perf_col2:
         with section_card("Decision Tree", "Per-class metrics and confusion matrix."):
@@ -73,11 +75,13 @@ def render_performance_tab(metrics: dict | None) -> None:
                 use_container_width=True,
                 hide_index=True,
             )
-            st.markdown("**Confusion matrix**")
-            st.dataframe(
-                render_confusion_matrix(tree_m["confusion_matrix"], classes),
-                use_container_width=True,
-            )
+            st.markdown("**Confusion matrix heatmap**")
+            render_confusion_heatmap(tree_m["confusion_matrix"], classes, "Decision Tree")
+            with st.expander("View raw confusion matrix"):
+                st.dataframe(
+                    render_confusion_matrix_table(tree_m["confusion_matrix"], classes),
+                    use_container_width=True,
+                )
 
     st.markdown("#### Feature Importance (Decision Tree)")
     importance_df = pd.DataFrame(

@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 import pandas as pd
 import streamlit as st
 
@@ -9,6 +11,7 @@ from ui.components import (
     section_card,
 )
 from ui.constants import TRAINING_RANGES
+from ui.reports import build_screening_report
 
 
 def _check_input_ranges(age: float, weight: float, height: float) -> list[str]:
@@ -32,6 +35,51 @@ def _predict_with_confidence(model, encoder, input_data: pd.DataFrame) -> tuple[
     probabilities = model.predict_proba(input_data)[0]
     confidence = float(max(probabilities))
     return label, confidence
+
+
+def _render_results(result: dict, metrics) -> None:
+    st.markdown("---")
+    st.markdown("### Diagnostic Comparison")
+
+    log_accuracy = metrics["logistic_regression"]["test_accuracy"] if metrics else None
+    tree_accuracy = metrics["decision_tree"]["test_accuracy"] if metrics else None
+
+    res_col1, res_col2 = st.columns(2, gap="medium")
+    with res_col1:
+        render_prediction_card(
+            "Multinomial Logistic Regression",
+            result["pred_log"],
+            result["conf_log"],
+            log_accuracy,
+        )
+    with res_col2:
+        render_prediction_card(
+            "Decision Tree Classifier",
+            result["pred_tree"],
+            result["conf_tree"],
+            tree_accuracy,
+        )
+
+    render_agreement_banner(result["agreement"])
+
+    report = build_screening_report(result)
+    dl_col1, dl_col2 = st.columns(2, gap="medium")
+    with dl_col1:
+        st.download_button(
+            label="Download CSV Report",
+            data=report["csv"],
+            file_name="malnutrition_screening_report.csv",
+            mime="text/csv",
+            use_container_width=True,
+        )
+    with dl_col2:
+        st.download_button(
+            label="Download Text Summary",
+            data=report["text"],
+            file_name="malnutrition_screening_report.txt",
+            mime="text/plain",
+            use_container_width=True,
+        )
 
 
 def render_screening_tab(log_reg, tree_clf, encoder, features, metrics) -> None:
@@ -73,26 +121,21 @@ def render_screening_tab(log_reg, tree_clf, encoder, features, metrics) -> None:
             pred_log, conf_log = _predict_with_confidence(log_reg, encoder, input_data)
             pred_tree, conf_tree = _predict_with_confidence(tree_clf, encoder, input_data)
 
-        st.markdown("---")
-        st.markdown("### Diagnostic Comparison")
+        st.session_state["screening_result"] = {
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+            "age": age,
+            "weight": weight,
+            "height": height,
+            "bmi": bmi,
+            "water": water,
+            "diarrhea": diarrhea,
+            "diet_score": diet_score,
+            "pred_log": pred_log,
+            "conf_log": conf_log,
+            "pred_tree": pred_tree,
+            "conf_tree": conf_tree,
+            "agreement": pred_log == pred_tree,
+        }
 
-        log_accuracy = metrics["logistic_regression"]["test_accuracy"] if metrics else None
-        tree_accuracy = metrics["decision_tree"]["test_accuracy"] if metrics else None
-
-        res_col1, res_col2 = st.columns(2, gap="medium")
-        with res_col1:
-            render_prediction_card(
-                "Multinomial Logistic Regression",
-                pred_log,
-                conf_log,
-                log_accuracy,
-            )
-        with res_col2:
-            render_prediction_card(
-                "Decision Tree Classifier",
-                pred_tree,
-                conf_tree,
-                tree_accuracy,
-            )
-
-        render_agreement_banner(pred_log == pred_tree)
+    if "screening_result" in st.session_state:
+        _render_results(st.session_state["screening_result"], metrics)

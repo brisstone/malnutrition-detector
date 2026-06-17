@@ -4,16 +4,18 @@ from services.artifacts import load_artifacts, load_metrics
 from ui.components import render_header
 from ui.performance import render_performance_tab
 from ui.screening import render_screening_tab
+from ui.sidebar import render_sidebar
 from ui.theme import inject_theme
 
 st.set_page_config(
     page_title="Malnutrition Detection System",
     layout="wide",
     page_icon="🩺",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
-inject_theme()
+dark_mode = render_sidebar()
+inject_theme(dark_mode=dark_mode)
 render_header()
 
 log_reg, tree_clf, encoder, features = load_artifacts()

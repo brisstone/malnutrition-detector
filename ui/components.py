@@ -142,13 +142,6 @@ def render_out_of_range_warning(messages: list[str]) -> None:
     )
 
 
-def render_confusion_matrix(cm: list, classes: list[str]) -> pd.DataFrame:
-    df = pd.DataFrame(cm, index=classes, columns=classes)
-    df.index.name = "Actual"
-    df.columns.name = "Predicted"
-    return df
-
-
 def render_classification_table(report: dict, classes: list[str]) -> pd.DataFrame:
     rows = []
     for label in classes:

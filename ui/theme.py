@@ -1,7 +1,6 @@
 import streamlit as st
 
-THEME_CSS = """
-<style>
+BASE_CSS = """
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
 
 html, body, [class*="css"] {
@@ -47,30 +46,6 @@ html, body, [class*="css"] {
     margin-bottom: 1.25rem;
 }
 
-.section-card {
-    background: #ffffff;
-    border: 1px solid #ece4da;
-    border-radius: 14px;
-    padding: 1.1rem 1.2rem 0.4rem 1.2rem;
-    margin-bottom: 0.75rem;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
-    height: 100%;
-}
-
-.section-card h3 {
-    color: #4a2f18 !important;
-    font-size: 1rem;
-    font-weight: 700;
-    margin: 0 0 0.85rem 0;
-    letter-spacing: 0.01em;
-}
-
-.section-card .hint {
-    color: #7a6553;
-    font-size: 0.82rem;
-    margin: -0.35rem 0 0.75rem 0;
-}
-
 .kpi-card {
     background: linear-gradient(180deg, #fffaf4 0%, #fff4e8 100%);
     border: 1px solid #edd9c2;
@@ -109,20 +84,9 @@ html, body, [class*="css"] {
     height: 100%;
 }
 
-.result-card.severe {
-    background: #fff1f1;
-    border-color: #f3b8b8;
-}
-
-.result-card.moderate {
-    background: #fff8eb;
-    border-color: #f0d39b;
-}
-
-.result-card.normal {
-    background: #eefaf1;
-    border-color: #b9e3c3;
-}
+.result-card.severe { background: #fff1f1; border-color: #f3b8b8; }
+.result-card.moderate { background: #fff8eb; border-color: #f0d39b; }
+.result-card.normal { background: #eefaf1; border-color: #b9e3c3; }
 
 .result-title {
     font-size: 0.95rem;
@@ -165,11 +129,7 @@ html, body, [class*="css"] {
     overflow: hidden;
 }
 
-.confidence-fill {
-    height: 8px;
-    border-radius: 999px;
-}
-
+.confidence-fill { height: 8px; border-radius: 999px; }
 .fill-severe { background: #dc3545; }
 .fill-moderate { background: #e0a800; }
 .fill-normal { background: #198754; }
@@ -181,17 +141,8 @@ html, body, [class*="css"] {
     font-size: 0.92rem;
 }
 
-.agreement.match {
-    background: #eefaf1;
-    border: 1px solid #b9e3c3;
-    color: #1f5d34;
-}
-
-.agreement.mismatch {
-    background: #eef4ff;
-    border: 1px solid #b8cff5;
-    color: #214f8a;
-}
+.agreement.match { background: #eefaf1; border: 1px solid #b9e3c3; color: #1f5d34; }
+.agreement.mismatch { background: #eef4ff; border: 1px solid #b8cff5; color: #214f8a; }
 
 .metric-tile {
     background: #fff;
@@ -216,19 +167,29 @@ html, body, [class*="css"] {
     margin-top: 0.2rem;
 }
 
-.stTabs [data-baseweb="tab-list"] {
-    gap: 0.35rem;
-}
+.stTabs [data-baseweb="tab-list"] { gap: 0.35rem; }
 
 .stTabs [data-baseweb="tab"] {
     background: #f7f1ea;
+    color: #6b4a2c !important;
+    border: 1px solid #e2d4c3;
+    border-bottom: none;
     border-radius: 10px 10px 0 0;
     padding: 0.55rem 1rem;
     font-weight: 600;
 }
 
+.stTabs [data-baseweb="tab"] * {
+    color: #6b4a2c !important;
+}
+
 .stTabs [aria-selected="true"] {
     background: #fff !important;
+    color: #4a2f18 !important;
+    border-color: #d7c3ad !important;
+}
+
+.stTabs [aria-selected="true"] * {
     color: #4a2f18 !important;
 }
 
@@ -245,12 +206,9 @@ html, body, [class*="css"] {
 .stButton>button:hover {
     background: linear-gradient(135deg, #7a4824 0%, #9a6833 100%);
     color: white;
-    border: none;
 }
 
-h2, h3, h4 {
-    color: #4a2f18 !important;
-}
+h2, h3, h4 { color: #4a2f18 !important; }
 
 .warning-chip {
     background: #fff4e5;
@@ -261,9 +219,95 @@ h2, h3, h4 {
     font-size: 0.86rem;
     margin-top: 0.5rem;
 }
-</style>
+"""
+
+DARK_CSS = """
+.stApp, [data-testid="stAppViewContainer"] {
+    background-color: #141210;
+    color: #f2ebe3;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #1c1814;
+    border-right: 1px solid #3a322a;
+}
+
+[data-testid="stSidebar"] * {
+    color: #f2ebe3 !important;
+}
+
+.disclaimer {
+    background: #2a2219;
+    border-color: #4a3d2f;
+    color: #e8d8c4;
+}
+
+.kpi-card {
+    background: linear-gradient(180deg, #221c16 0%, #2a2219 100%);
+    border-color: #4a3d2f;
+}
+
+.kpi-label, .kpi-sub { color: #c4b5a3; }
+.kpi-value, .metric-tile .value { color: #f7efe6; }
+
+.metric-tile {
+    background: #1f1a15;
+    border-color: #3a322a;
+}
+
+.metric-tile .label { color: #b8a894; }
+
+.result-title { color: #f2ebe3; }
+.result-message { color: #d9cbb9; }
+.confidence-label { color: #b8a894; }
+.confidence-track { background: #3a322a; }
+
+.result-card.severe { background: #3a1f22; border-color: #7a3a42; }
+.result-card.moderate { background: #3a2f14; border-color: #7a5e22; }
+.result-card.normal { background: #1a2e22; border-color: #2f6b4a; }
+
+.agreement.match { background: #1a2e22; border-color: #2f6b4a; color: #b9e3c3; }
+.agreement.mismatch { background: #1a2438; border-color: #3a5f8a; color: #b8cff5; }
+
+.warning-chip {
+    background: #3a2f14;
+    border-color: #7a5e22;
+    color: #f0d39b;
+}
+
+h2, h3, h4 { color: #f2ebe3 !important; }
+
+.stTabs [data-baseweb="tab"] {
+    background: #221c16;
+    color: #d9cbb9 !important;
+    border: 1px solid #3a322a;
+    border-bottom: none;
+}
+
+.stTabs [data-baseweb="tab"] * {
+    color: #d9cbb9 !important;
+}
+
+.stTabs [aria-selected="true"] {
+    background: #2a2219 !important;
+    color: #f7efe6 !important;
+    border-color: #4a3d2f !important;
+}
+
+.stTabs [aria-selected="true"] * {
+    color: #f7efe6 !important;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: #1f1a15;
+    border-color: #3a322a !important;
+}
 """
 
 
-def inject_theme() -> None:
-    st.markdown(THEME_CSS, unsafe_allow_html=True)
+def inject_theme(dark_mode: bool = False) -> None:
+    css = f"<style>{BASE_CSS}"
+    if dark_mode:
+        css += DARK_CSS
+    css += "</style>"
+    st.markdown(css, unsafe_allow_html=True)
