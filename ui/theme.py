@@ -5,6 +5,21 @@ BASE_CSS = """
 
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
+    color: #2f2419;
+}
+
+.stApp, [data-testid="stAppViewContainer"] {
+    background-color: #f8f5f0;
+    color: #2f2419;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #f4efe8;
+    border-right: 1px solid #e2d4c3;
+}
+
+[data-testid="stSidebar"] * {
+    color: #3e2f21 !important;
 }
 
 .block-container {
@@ -191,6 +206,11 @@ html, body, [class*="css"] {
 
 .stTabs [aria-selected="true"] * {
     color: #4a2f18 !important;
+}
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background: #fffdfa;
+    border-color: #e7dcca !important;
 }
 
 .stButton>button {
