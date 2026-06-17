@@ -84,9 +84,18 @@ html, body, [class*="css"] {
     height: 100%;
 }
 
-.result-card.severe { background: #fff1f1; border-color: #f3b8b8; }
-.result-card.moderate { background: #fff8eb; border-color: #f0d39b; }
-.result-card.normal { background: #eefaf1; border-color: #b9e3c3; }
+.result-card.severe {
+    background: color-mix(in srgb, #dc3545 14%, var(--secondary-background-color));
+    border-color: color-mix(in srgb, #dc3545 42%, transparent);
+}
+.result-card.moderate {
+    background: color-mix(in srgb, #e0a800 14%, var(--secondary-background-color));
+    border-color: color-mix(in srgb, #e0a800 42%, transparent);
+}
+.result-card.normal {
+    background: color-mix(in srgb, #198754 14%, var(--secondary-background-color));
+    border-color: color-mix(in srgb, #198754 42%, transparent);
+}
 
 .result-title {
     font-size: 0.95rem;
@@ -141,8 +150,16 @@ html, body, [class*="css"] {
     font-size: 0.92rem;
 }
 
-.agreement.match { background: #eefaf1; border: 1px solid #b9e3c3; color: #1f5d34; }
-.agreement.mismatch { background: #eef4ff; border: 1px solid #b8cff5; color: #214f8a; }
+.agreement.match {
+    background: color-mix(in srgb, #198754 12%, var(--secondary-background-color));
+    border: 1px solid color-mix(in srgb, #198754 42%, transparent);
+    color: var(--text-color);
+}
+.agreement.mismatch {
+    background: color-mix(in srgb, #4b79d8 14%, var(--secondary-background-color));
+    border: 1px solid color-mix(in srgb, #4b79d8 42%, transparent);
+    color: var(--text-color);
+}
 
 .metric-tile {
     background: color-mix(in srgb, var(--secondary-background-color) 82%, transparent);
@@ -213,7 +230,7 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
     color: white;
 }
 
-h2, h3, h4 { color: #4a2f18 !important; }
+h2, h3, h4 { color: var(--text-color) !important; }
 
 .warning-chip {
     background: color-mix(in srgb, #d98f00 12%, var(--secondary-background-color));
