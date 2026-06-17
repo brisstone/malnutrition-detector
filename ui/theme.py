@@ -5,21 +5,6 @@ BASE_CSS = """
 
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
-    color: #2f2419;
-}
-
-.stApp, [data-testid="stAppViewContainer"] {
-    background-color: #f8f5f0;
-    color: #2f2419;
-}
-
-[data-testid="stSidebar"] {
-    background-color: #f4efe8;
-    border-right: 1px solid #e2d4c3;
-}
-
-[data-testid="stSidebar"] * {
-    color: #3e2f21 !important;
 }
 
 .block-container {
@@ -29,8 +14,8 @@ html, body, [class*="css"] {
 }
 
 .hero {
-    background: linear-gradient(135deg, #3d2314 0%, #6b3e1e 45%, #8b5a2b 100%);
-    color: #fff;
+    background: linear-gradient(135deg, #5c3a1e 0%, #7a4b24 45%, #996132 100%);
+    color: #ffffff;
     padding: 1.75rem 2rem;
     border-radius: 16px;
     margin-bottom: 1.25rem;
@@ -52,9 +37,9 @@ html, body, [class*="css"] {
 }
 
 .disclaimer {
-    background: #fff8ef;
-    border: 1px solid #edd9c2;
-    color: #5c3d1e;
+    background: color-mix(in srgb, var(--secondary-background-color) 85%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 18%, transparent);
+    color: var(--text-color);
     padding: 0.75rem 1rem;
     border-radius: 10px;
     font-size: 0.9rem;
@@ -62,8 +47,8 @@ html, body, [class*="css"] {
 }
 
 .kpi-card {
-    background: linear-gradient(180deg, #fffaf4 0%, #fff4e8 100%);
-    border: 1px solid #edd9c2;
+    background: color-mix(in srgb, var(--secondary-background-color) 88%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
     border-radius: 14px;
     padding: 1.25rem 1.35rem;
     text-align: center;
@@ -71,7 +56,7 @@ html, body, [class*="css"] {
 }
 
 .kpi-label {
-    color: #7a5a3d;
+    color: color-mix(in srgb, var(--text-color) 72%, transparent);
     font-size: 0.85rem;
     font-weight: 600;
     text-transform: uppercase;
@@ -79,7 +64,7 @@ html, body, [class*="css"] {
 }
 
 .kpi-value {
-    color: #3d2314;
+    color: var(--text-color);
     font-size: 2.4rem;
     font-weight: 700;
     line-height: 1.1;
@@ -87,7 +72,7 @@ html, body, [class*="css"] {
 }
 
 .kpi-sub {
-    color: #8a6f55;
+    color: color-mix(in srgb, var(--text-color) 72%, transparent);
     font-size: 0.82rem;
     margin-top: 0.35rem;
 }
@@ -106,7 +91,7 @@ html, body, [class*="css"] {
 .result-title {
     font-size: 0.95rem;
     font-weight: 700;
-    color: #4a2f18;
+    color: var(--text-color);
     margin-bottom: 0.35rem;
 }
 
@@ -127,18 +112,18 @@ html, body, [class*="css"] {
 
 .result-message {
     font-size: 0.92rem;
-    color: #4a3424;
+    color: color-mix(in srgb, var(--text-color) 84%, transparent);
     margin: 0.35rem 0 0.75rem 0;
 }
 
 .confidence-label {
     font-size: 0.8rem;
-    color: #6f5a47;
+    color: color-mix(in srgb, var(--text-color) 72%, transparent);
     margin-bottom: 0.2rem;
 }
 
 .confidence-track {
-    background: #efe6db;
+    background: color-mix(in srgb, var(--secondary-background-color) 65%, transparent);
     border-radius: 999px;
     height: 8px;
     overflow: hidden;
@@ -160,15 +145,15 @@ html, body, [class*="css"] {
 .agreement.mismatch { background: #eef4ff; border: 1px solid #b8cff5; color: #214f8a; }
 
 .metric-tile {
-    background: #fff;
-    border: 1px solid #ece4da;
+    background: color-mix(in srgb, var(--secondary-background-color) 82%, transparent);
+    border: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
     border-radius: 12px;
     padding: 0.9rem 1rem;
     height: 100%;
 }
 
 .metric-tile .label {
-    color: #7a6553;
+    color: color-mix(in srgb, var(--text-color) 68%, transparent);
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -176,7 +161,7 @@ html, body, [class*="css"] {
 }
 
 .metric-tile .value {
-    color: #3d2314;
+    color: var(--text-color);
     font-size: 1.35rem;
     font-weight: 700;
     margin-top: 0.2rem;
@@ -185,9 +170,9 @@ html, body, [class*="css"] {
 .stTabs [data-baseweb="tab-list"] { gap: 0.35rem; }
 
 .stTabs [data-baseweb="tab"] {
-    background: #f7f1ea;
-    color: #6b4a2c !important;
-    border: 1px solid #e2d4c3;
+    background: color-mix(in srgb, var(--secondary-background-color) 78%, transparent);
+    color: color-mix(in srgb, var(--text-color) 82%, transparent) !important;
+    border: 1px solid color-mix(in srgb, var(--text-color) 14%, transparent);
     border-bottom: none;
     border-radius: 10px 10px 0 0;
     padding: 0.55rem 1rem;
@@ -195,22 +180,22 @@ html, body, [class*="css"] {
 }
 
 .stTabs [data-baseweb="tab"] * {
-    color: #6b4a2c !important;
+    color: color-mix(in srgb, var(--text-color) 82%, transparent) !important;
 }
 
 .stTabs [aria-selected="true"] {
-    background: #fff !important;
-    color: #4a2f18 !important;
-    border-color: #d7c3ad !important;
+    background: var(--background-color) !important;
+    color: var(--text-color) !important;
+    border-color: color-mix(in srgb, var(--text-color) 24%, transparent) !important;
 }
 
 .stTabs [aria-selected="true"] * {
-    color: #4a2f18 !important;
+    color: var(--text-color) !important;
 }
 
 div[data-testid="stVerticalBlockBorderWrapper"] {
-    background: #fffdfa;
-    border-color: #e7dcca !important;
+    background: color-mix(in srgb, var(--background-color) 90%, transparent);
+    border-color: color-mix(in srgb, var(--text-color) 14%, transparent) !important;
 }
 
 .stButton > button {
@@ -231,9 +216,9 @@ div[data-testid="stVerticalBlockBorderWrapper"] {
 h2, h3, h4 { color: #4a2f18 !important; }
 
 .warning-chip {
-    background: #fff4e5;
-    border: 1px solid #f0d39b;
-    color: #7a4d00;
+    background: color-mix(in srgb, #d98f00 12%, var(--secondary-background-color));
+    border: 1px solid color-mix(in srgb, #d98f00 36%, transparent);
+    color: var(--text-color);
     border-radius: 10px;
     padding: 0.65rem 0.85rem;
     font-size: 0.86rem;
