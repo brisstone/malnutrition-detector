@@ -25,7 +25,7 @@ def render_sidebar() -> None:
 - Record weight and height **before** running the model.
 - Ask about **recent diarrhea** and **diet variety** in the past week.
 - Treat **severe** cases as urgent referral candidates.
-- When models **disagree**, use clinical judgement — do not rely on the app alone.
+- When models **disagree**, use clinical judgement ; do not rely on the app alone.
             """
         )
 

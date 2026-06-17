@@ -2,7 +2,7 @@
 
 ## Project Aim
 
-This project provides a machine-learning decision-support tool to help frontline health workers in rural Nigeria classify pediatric malnutrition (**Severe**, **Moderate**, **Normal**) among children under five. It is **not** a clinical diagnosis — predictions should be confirmed with local protocols.
+This project provides a machine-learning decision-support tool to help frontline health workers in rural Nigeria classify pediatric malnutrition (**Severe**, **Moderate**, **Normal**) among children under five. It is **not** a clinical diagnosis - predictions should be confirmed with local protocols.
 
 ## Project Structure
 
@@ -35,7 +35,7 @@ malnutrition-detector/
 |--------|--------|
 | **Base data** | Public Kaggle-style "Children Malnutrition Dataset" (`data/malnutrition_data.csv`, 5,000 rows) |
 | **Nature** | Appears **synthetic or rule-derived** (e.g. many rows share identical weight/BMI values). Treat metrics as pipeline demonstration, not real-world clinical validation. |
-| **Target** | `nutrition_status` — severe (7%), moderate (22%), normal (71%) |
+| **Target** | `nutrition_status` - severe (7%), moderate (22%), normal (71%) |
 | **Socio-behavioural fields** | **Simulated** in `train.py` (not collected in the original CSV). Generated from **anthropometric risk** (low BMI / low weight quartiles), **not** from nutrition labels, to avoid target leakage. |
 | **MUAC** | Present in the CSV but **excluded** from training because labels largely follow MUAC cutoffs. |
 
@@ -43,12 +43,12 @@ malnutrition-detector/
 
 **Anthropometric**
 - `age_months`, `weight_kg`, `height_cm`
-- `bmi` — **always recomputed** as `weight_kg / (height_m²)` in both training and the app (CSV `bmi` column is ignored)
+- `bmi` - **always recomputed** as `weight_kg / (height_m²)` in both training and the app (CSV `bmi` column is ignored)
 
 **Socio-behavioural** (simulated for training; collected via UI at inference)
-- `water_source` — Safe (0) / Unsafe (1)
-- `dietary_diversity_score` — 1–6
-- `diarrhea_past_2_weeks` — No (0) / Yes (1)
+- `water_source` - Safe (0) / Unsafe (1)
+- `dietary_diversity_score` - 1–6
+- `diarrhea_past_2_weeks` - No (0) / Yes (1)
 
 ## Models & Methodology
 
@@ -125,8 +125,8 @@ streamlit run app.py         # launch the web app
 ```
 
 **App tabs**
-- **Patient Screening** — enter vitals and socio-behavioural inputs; compare LR vs Decision Tree predictions for one child; download CSV/text screening reports.
-- **Model Performance** — view CV/test metrics, confusion matrix heatmaps, and feature importance from `models/metrics.json`.
+- **Patient Screening** - enter vitals and socio-behavioural inputs; compare LR vs Decision Tree predictions for one child; download CSV/text screening reports.
+- **Model Performance** - view CV/test metrics, confusion matrix heatmaps, and feature importance from `models/metrics.json`.
 
 **Sidebar**
 - WHO MUAC reference cutoffs and screening tips.
