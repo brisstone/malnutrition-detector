@@ -241,6 +241,63 @@ h2, h3, h4 { color: var(--text-color) !important; }
     font-size: 0.86rem;
     margin-top: 0.5rem;
 }
+
+.recommendation-panel {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 0.75rem 0 1rem 0;
+}
+
+.recommendation-card {
+    border-radius: 12px;
+    padding: 0.9rem 1rem;
+    border: 1px solid transparent;
+}
+
+.champion-overall {
+    background: color-mix(in srgb, #996132 14%, var(--secondary-background-color));
+    border-color: color-mix(in srgb, #996132 40%, transparent);
+}
+
+.champion-clinical {
+    background: color-mix(in srgb, #198754 12%, var(--secondary-background-color));
+    border-color: color-mix(in srgb, #198754 40%, transparent);
+}
+
+.recommendation-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: color-mix(in srgb, var(--text-color) 70%, transparent);
+}
+
+.recommendation-model {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0.25rem 0;
+}
+
+.recommendation-detail {
+    font-size: 0.82rem;
+    color: color-mix(in srgb, var(--text-color) 78%, transparent);
+}
+
+.model-badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    margin-bottom: 0.45rem;
+    background: color-mix(in srgb, #198754 18%, var(--secondary-background-color));
+    border: 1px solid color-mix(in srgb, #198754 45%, transparent);
+    color: var(--text-color);
+}
 """
 
 

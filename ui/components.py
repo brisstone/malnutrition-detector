@@ -81,19 +81,53 @@ def render_metric_tile(label: str, value: str) -> None:
     )
 
 
+def render_model_recommendations(metrics: dict) -> None:
+    from ui.recommendations import compute_model_recommendations
+
+    rec = compute_model_recommendations(metrics)
+    st.markdown(
+        f"""
+        <div class="recommendation-panel">
+            <div class="recommendation-card champion-overall">
+                <div class="recommendation-label">Overall metrics champion</div>
+                <div class="recommendation-model">{html.escape(rec["overall_champion"])}</div>
+                <div class="recommendation-detail">
+                    Highest test macro F1
+                    (LR {rec["log_macro_f1"]:.3f} vs DT {rec["tree_macro_f1"]:.3f})
+                </div>
+            </div>
+            <div class="recommendation-card champion-clinical">
+                <div class="recommendation-label">Recommended for screening</div>
+                <div class="recommendation-model">{html.escape(rec["clinical_champion"])}</div>
+                <div class="recommendation-detail">
+                    Best severe-class recall
+                    (LR {rec["log_severe_recall_pct"]:.1f}% vs DT {rec["tree_severe_recall_pct"]:.1f}%)
+                </div>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def render_prediction_card(
     model_name: str,
     label: str,
     confidence: float,
     test_accuracy: float | None = None,
+    badge: str | None = None,
 ) -> None:
     config = STATUS_CONFIG.get(label, STATUS_CONFIG["normal"])
     accuracy_text = (
         f"Test accuracy: {test_accuracy * 100:.1f}%" if test_accuracy is not None else ""
     )
+    badge_html = (
+        f'<div class="model-badge">{html.escape(badge)}</div>' if badge else ""
+    )
     st.markdown(
         f"""
         <div class="result-card {config['card_class']}">
+            {badge_html}
             <div class="result-title">{html.escape(model_name)}</div>
             <div class="result-badge {config['badge_class']}">{config['label']}</div>
             <div class="result-message">{config['message']}</div>

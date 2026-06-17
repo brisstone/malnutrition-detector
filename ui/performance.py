@@ -5,6 +5,7 @@ from ui.charts import render_confusion_heatmap, render_confusion_matrix_table
 from ui.components import (
     render_classification_table,
     render_metric_tile,
+    render_model_recommendations,
     section_card,
 )
 
@@ -50,6 +51,9 @@ def render_performance_tab(metrics: dict | None) -> None:
         ]
     )
     st.dataframe(summary, use_container_width=True, hide_index=True)
+
+    st.markdown("#### Model recommendation")
+    render_model_recommendations(metrics)
 
     perf_col1, perf_col2 = st.columns(2, gap="medium")
 

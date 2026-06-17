@@ -11,6 +11,7 @@ from ui.components import (
     section_card,
 )
 from ui.constants import TRAINING_RANGES
+from ui.recommendations import compute_model_recommendations
 from ui.reports import build_screening_report
 
 
@@ -44,6 +45,15 @@ def _render_results(result: dict, metrics) -> None:
     log_accuracy = metrics["logistic_regression"]["test_accuracy"] if metrics else None
     tree_accuracy = metrics["decision_tree"]["test_accuracy"] if metrics else None
 
+    log_badge = None
+    tree_badge = None
+    if metrics:
+        rec = compute_model_recommendations(metrics)
+        if rec["clinical_champion"] == "Logistic Regression":
+            log_badge = "Recommended for screening"
+        if rec["overall_champion"] == "Decision Tree":
+            tree_badge = "Overall metrics champion"
+
     res_col1, res_col2 = st.columns(2, gap="medium")
     with res_col1:
         render_prediction_card(
@@ -51,6 +61,7 @@ def _render_results(result: dict, metrics) -> None:
             result["pred_log"],
             result["conf_log"],
             log_accuracy,
+            badge=log_badge,
         )
     with res_col2:
         render_prediction_card(
@@ -58,6 +69,7 @@ def _render_results(result: dict, metrics) -> None:
             result["pred_tree"],
             result["conf_tree"],
             tree_accuracy,
+            badge=tree_badge,
         )
 
     render_agreement_banner(result["agreement"])
