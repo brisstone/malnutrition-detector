@@ -8,6 +8,12 @@ html, body, [class*="css"] {
     color: #2f2419;
 }
 
+:root {
+    --background-color: #f8f5f0;
+    --secondary-background-color: #f4efe8;
+    --text-color: #2f2419;
+}
+
 .stApp, [data-testid="stAppViewContainer"] {
     background-color: #f8f5f0;
     color: #2f2419;
@@ -20,6 +26,46 @@ html, body, [class*="css"] {
 
 [data-testid="stSidebar"] * {
     color: #3e2f21 !important;
+}
+
+/* Force light widget surfaces */
+[data-baseweb="input"],
+[data-baseweb="select"] > div,
+[data-baseweb="base-input"] {
+    background: #fffdfa !important;
+    border-color: #d8c8b6 !important;
+}
+
+[data-baseweb="input"] input,
+[data-baseweb="select"] input,
+[data-baseweb="select"] span {
+    color: #2f2419 !important;
+}
+
+[data-testid="stNumberInput"] button,
+[data-testid="stSelectbox"] button {
+    color: #2f2419 !important;
+}
+
+[data-testid="stSlider"] [role="slider"] {
+    background: #8b5a2b !important;
+}
+
+[data-testid="stSlider"] [data-baseweb="slider"] > div > div {
+    background: #d8c8b6 !important;
+}
+
+/* Force light dataframes/tables */
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    background: #fffdfa !important;
+    color: #2f2419 !important;
+    border-radius: 10px;
+}
+
+[data-testid="stDataFrame"] * ,
+[data-testid="stTable"] * {
+    color: #2f2419 !important;
 }
 
 .block-container {
@@ -247,12 +293,49 @@ DARK_CSS = """
     color: #f2ebe3;
 }
 
+:root {
+    --background-color: #141210;
+    --secondary-background-color: #1c1814;
+    --text-color: #f2ebe3;
+}
+
 [data-testid="stSidebar"] {
     background-color: #1c1814;
     border-right: 1px solid #3a322a;
 }
 
 [data-testid="stSidebar"] * {
+    color: #f2ebe3 !important;
+}
+
+/* Dark widget surfaces */
+[data-baseweb="input"],
+[data-baseweb="select"] > div,
+[data-baseweb="base-input"] {
+    background: #231d17 !important;
+    border-color: #4a3d2f !important;
+}
+
+[data-baseweb="input"] input,
+[data-baseweb="select"] input,
+[data-baseweb="select"] span,
+[data-testid="stNumberInput"] button,
+[data-testid="stSelectbox"] button {
+    color: #f2ebe3 !important;
+}
+
+[data-testid="stSlider"] [data-baseweb="slider"] > div > div {
+    background: #4a3d2f !important;
+}
+
+[data-testid="stDataFrame"],
+[data-testid="stTable"] {
+    background: #1f1a15 !important;
+    color: #f2ebe3 !important;
+}
+
+[data-testid="stDataFrame"] * ,
+[data-testid="stTable"] * {
     color: #f2ebe3 !important;
 }
 
