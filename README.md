@@ -54,8 +54,8 @@ malnutrition-detector/
 
 Two classifiers are trained and compared:
 
-1. **Multinomial Logistic Regression** (primary)
-2. **Decision Tree** (comparison)
+1. **Multinomial Logistic Regression**
+2. **Decision Tree Classifier**
 
 | Step | Approach |
 |------|----------|
@@ -63,6 +63,7 @@ Two classifiers are trained and compared:
 | Class imbalance | `class_weight='balanced'` on both models |
 | Cross-validation | **5-fold stratified** on the training set only |
 | Evaluation | Accuracy, per-class precision/recall/F1, confusion matrices |
+| Champion selection | Highest **test macro F1-score** (see below) |
 | Artifacts | Saved to `models/` (see structure above) |
 
 Run training to see current numbers:
@@ -71,7 +72,42 @@ Run training to see current numbers:
 python train.py
 ```
 
-The Streamlit app loads `models/metrics.json` for the **Model Performance** tab (confusion matrices, per-class metrics, feature importance).
+The Streamlit app loads `models/metrics.json` for the **Model Performance** tab (confusion matrices, per-class metrics, feature importance, model recommendations).
+
+## Champion Model Selection
+
+After training Multinomial Logistic Regression and Decision Tree Classifier on the same stratified 70/30 split with balanced class weights, model performance was evaluated using 5-fold stratified cross-validation and a held-out test set. The primary selection metric was **macro F1-score**, chosen because the dataset is imbalanced (severe: ~7%, moderate: ~22%, normal: ~71%) and accuracy alone can favour the majority class.
+
+### Results summary
+
+| Metric | Logistic Regression | Decision Tree | Winner |
+|--------|---------------------|---------------|--------|
+| CV accuracy | 80.63% ± 1.26% | **85.49% ± 0.70%** | Decision Tree |
+| Test accuracy | 80.60% | **84.80%** | Decision Tree |
+| Test macro F1 | 0.729 | **0.751** | Decision Tree |
+
+### Per-class F1 (test set)
+
+| Class | Logistic Regression | Decision Tree |
+|-------|---------------------|---------------|
+| moderate | 0.653 | **0.712** |
+| normal | 0.884 | **0.912** |
+| severe | **0.651** | 0.629 |
+
+### Champion model
+
+The **Decision Tree Classifier** was selected as the **champion model** because it achieved:
+
+- The highest test macro F1 (**0.751** vs **0.729**)
+- Higher test accuracy (**84.80%** vs **80.60%**)
+- Higher cross-validation accuracy (**85.49%** vs **80.63%**)
+- Better F1-scores on moderate and normal classes
+
+Top feature drivers (Decision Tree importance): `age_months` (35.1%), `weight_kg` (30.7%), `bmi` (22.0%).
+
+### Trade-off
+
+Logistic Regression achieved higher **severe-class recall** (**90.5%** vs **62.9%**), meaning it misses fewer severe cases but produces more false alarms and lower overall performance. The app therefore shows both models: Decision Tree as the overall metrics champion, with Logistic Regression flagged as recommended for screening when severe-case sensitivity is prioritised.
 
 ## Limitations
 
@@ -93,4 +129,4 @@ streamlit run app.py         # launch the web app
 - **Model Performance** — view CV/test metrics, confusion matrix heatmaps, and feature importance from `models/metrics.json`.
 
 **Sidebar**
-- WHO MUAC reference cutoffs, screening tips, and optional dark mode toggle.
+- WHO MUAC reference cutoffs and screening tips.
