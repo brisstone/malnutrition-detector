@@ -1,0 +1,145 @@
+{
+  "classes": [
+    "moderate",
+    "normal",
+    "severe"
+  ],
+  "methodology": {
+    "bmi": "Recomputed from weight_kg and height_cm",
+    "muac_excluded": true,
+    "socio_behavioural_source": "Simulated from anthropometric risk quartiles (not from nutrition labels)",
+    "train_test_split": "70/30 stratified",
+    "class_weight": "balanced",
+    "cross_validation": "5-fold stratified on training set"
+  },
+  "logistic_regression": {
+    "cv_accuracy_mean": 0.8062857142857144,
+    "cv_accuracy_std": 0.012603854285778742,
+    "test_accuracy": 0.806,
+    "test_macro_f1": 0.7289989829303986,
+    "classification_report": {
+      "moderate": {
+        "precision": 0.6067708333333334,
+        "recall": 0.706060606060606,
+        "f1-score": 0.6526610644257703,
+        "support": 330.0
+      },
+      "normal": {
+        "precision": 0.9483315392895587,
+        "recall": 0.8272300469483568,
+        "f1-score": 0.8836509528585758,
+        "support": 1065.0
+      },
+      "severe": {
+        "precision": 0.5080213903743316,
+        "recall": 0.9047619047619048,
+        "f1-score": 0.6506849315068494,
+        "support": 105.0
+      },
+      "accuracy": 0.806,
+      "macro avg": {
+        "precision": 0.6877079209990745,
+        "recall": 0.8126841859236226,
+        "f1-score": 0.7289989829303986,
+        "support": 1500.0
+      },
+      "weighted avg": {
+        "precision": 0.8423664735551232,
+        "recall": 0.806,
+        "f1-score": 0.8165255559087379,
+        "support": 1500.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        233,
+        45,
+        52
+      ],
+      [
+        144,
+        881,
+        40
+      ],
+      [
+        7,
+        3,
+        95
+      ]
+    ],
+    "coefficients": {
+      "age_months": 1.5815719104731823e-11,
+      "weight_kg": -1.7676349273187952e-10,
+      "height_cm": 4.810633373134958e-12,
+      "bmi": -3.1301738978584126e-11,
+      "water_source": 4.423461597014011e-12,
+      "dietary_diversity_score": -6.981822527526068e-13,
+      "diarrhea_past_2_weeks": -9.93409058717513e-12
+    }
+  },
+  "decision_tree": {
+    "cv_accuracy_mean": 0.8548571428571428,
+    "cv_accuracy_std": 0.007033447785766381,
+    "test_accuracy": 0.848,
+    "test_macro_f1": 0.7508099099648394,
+    "classification_report": {
+      "moderate": {
+        "precision": 0.7121212121212122,
+        "recall": 0.7121212121212122,
+        "f1-score": 0.7121212121212122,
+        "support": 330.0
+      },
+      "normal": {
+        "precision": 0.9117370892018779,
+        "recall": 0.9117370892018779,
+        "f1-score": 0.9117370892018779,
+        "support": 1065.0
+      },
+      "severe": {
+        "precision": 0.6285714285714286,
+        "recall": 0.6285714285714286,
+        "f1-score": 0.6285714285714286,
+        "support": 105.0
+      },
+      "accuracy": 0.848,
+      "macro avg": {
+        "precision": 0.7508099099648394,
+        "recall": 0.7508099099648394,
+        "f1-score": 0.7508099099648394,
+        "support": 1500.0
+      },
+      "weighted avg": {
+        "precision": 0.848,
+        "recall": 0.848,
+        "f1-score": 0.848,
+        "support": 1500.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        235,
+        75,
+        20
+      ],
+      [
+        75,
+        971,
+        19
+      ],
+      [
+        20,
+        19,
+        66
+      ]
+    ],
+    "feature_importance": {
+      "age_months": 0.3506130261446906,
+      "weight_kg": 0.3073451371816223,
+      "bmi": 0.21972050016668168,
+      "height_cm": 0.06740961981160226,
+      "dietary_diversity_score": 0.03204954003589712,
+      "water_source": 0.011680767855731583,
+      "diarrhea_past_2_weeks": 0.011181408803774459
+    }
+  }
+}
